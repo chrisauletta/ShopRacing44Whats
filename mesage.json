@@ -1,0 +1,19 @@
+{
+    "inicio":{
+        "pergunta":"Olá! O que deseja fazer?\n1 - Anunciar\n2- Remover Anuncio\n3 - Ver seus Anuncios",
+        "resposta1":"Você escolheu a Anunciar:\nVocê ja tem cadastro?\nSim ou Não",
+        "resposta2":"Você escolheu Remover Anuncio",
+        "resposta3":"Ver seus Anuncios"
+    },
+    "pessoa":{
+        "pergunta1":"Ok, me informe seu CPF para consulta.",
+        "pergunta2":"Ok, vamos fazer uma cadastro, é rapidinho.\nSó mandar as seguintes informações nesse mesmo formato,\nvou até colocar em outra menssagem para te ajudar a copiar e colar",
+        "pergunta22":"Nome Completo:\nCPF:\nTelefone:\nCelular:\nCidade:\nEstado:",
+        "resposta2":"Seu cadastro foi efutuado com sucesso.\nAgora vamos anunciar!"
+    },
+    "anuncio":{
+        "pergunta1":"Agora vamos anunciar!\nPor favor preencha as informações nesse formato:",
+        "pergunta11":"Titulo:Coletor MI\nDescrição:Coletor MI em otimo estado\nValor:500",
+        "resposta1":"Seu anuncio foi feito com sucesso.\nAgora vamos incluir as fotos! Mande uma por uma e aguarde o retorno"
+    }
+}

@@ -1,0 +1,15 @@
+2023/06/30-18:26:21.826 51b0 Reusing MANIFEST C:\Users\cauletta\Documents\outros\whats_node\wppconnect01\tokens\bot-session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2023/06/30-18:26:21.827 51b0 Recovering log #323
+2023/06/30-18:26:21.837 51b0 Reusing old log C:\Users\cauletta\Documents\outros\whats_node\wppconnect01\tokens\bot-session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000323.log 
+2023/06/30-18:29:07.040 51b0 Level-0 table #329: started
+2023/06/30-18:29:07.089 51b0 Level-0 table #329: 1206704 bytes OK
+2023/06/30-18:29:07.091 51b0 Delete type=0 #323
+2023/06/30-18:29:29.905 272c Compacting 1@1 + 2@2 files
+2023/06/30-18:29:30.003 272c Generated table #330@1: 79250 keys, 2286801 bytes
+2023/06/30-18:29:30.066 272c Generated table #331@1: 35864 keys, 2272517 bytes
+2023/06/30-18:29:30.071 272c Generated table #332@1: 3898 keys, 71800 bytes
+2023/06/30-18:29:30.071 272c Compacted 1@1 + 2@2 files => 4631118 bytes
+2023/06/30-18:29:30.072 272c compacted to: files[ 0 0 3 0 0 0 0 ]
+2023/06/30-18:29:30.072 272c Delete type=2 #325
+2023/06/30-18:29:30.072 272c Delete type=2 #326
+2023/06/30-18:29:30.072 272c Delete type=2 #329

@@ -33,12 +33,7 @@ async function start(client) {
   //var api = 'http://localhost:21012/';
   var api = 'http://auto-unity.kinghost.net:21044/';
   var countImage = 0;
-  // client.getWid('Nome do Contato ou Grupo')
-  // .then((wid) => {
-  //   console.log('WID:', wid);
-  // })
-  // .catch((error) => console.log('Erro ao obter o WID:', error));
-  
+  var pessoaTemp = '';
   await client.onMessage(async (message) => {
     if (message.fromMe) {
       return;
@@ -68,7 +63,14 @@ async function start(client) {
         }else if(progress.level3 == 'consultarCpf'){
           await consultarCpf(message);
         }else if(progress.level3 == 'cadastrarPessoa'){
-          await cadastarPessoa(message);
+          if(message.body.toLowerCase() == 'sim'){
+            await cadastarPessoa();
+          }else if(tirarAcento(message.body.toLowerCase()) == 'nao'){
+            await client.sendText(message.from, 'Insira a informações novamente');
+            await client.sendText(message.from, bot.pessoa.pergunta22);
+          }else{
+            await validarPessoa(message);
+          }
         }else if(progress.level3 == 'cadastrarAnuncio'){
           await cadastrarAnuncio(message);
         }else if(progress.level3 == 'cadastrarAnuncioImagem'){
@@ -142,21 +144,38 @@ async function start(client) {
       await client.sendText(message.from,'Ocorreu um erro ao chamar a API.');
     }
   }
-  async function cadastarPessoa(message) {
-    const replyPessoa = tratarMensagem(message.body);
+  async function validarPessoa(message){
+    pessoaTemp = tratarMensagem(message.body);
   
-    try {
-      var cpf = validarCpf(replyPessoa['CPF']);
+      var cpf = validarCpf(pessoaTemp['CPF']);
       if(!cpf){
         await client.sendText(message.from,'CPF invalido');
         return;
       }
+      if(pessoaTemp['CEP']){
+        endereco = await buscarCep(pessoaTemp['CEP']);
+        if(endereco){
+          console.log(endereco);
+          var msgEndereco = 'Cidade:'+endereco.data.localidade
+          msgEndereco += '\nEstado:'+endereco.data.uf
+          await client.sendText(message.from,msgEndereco);
+          await client.sendText(message.from,'Seu endereço esta correto?');
+          pessoaTemp['Cidade'] = endereco.data.localidade;
+          pessoaTemp['Estado'] = endereco.data.uf;
+        }else{
+          await client.sendText(message.from,'Ocorreu um erro ao chamar a API Via Cep.');
+        }
+      }
+  }
+  async function cadastarPessoa() {
+  console.log(pessoaTemp);
+    try {
       var response = await axios.post(api+'customers',{
-        name:replyPessoa['Nome Completo'],
-        document:cpf,
-        cell:replyPessoa['Celular'],
-        city:replyPessoa['Cidade'],
-        state:replyPessoa['Estado'],
+        name:pessoaTemp['Nome Completo'],
+        document:pessoaTemp['CPF'],
+        cell:pessoaTemp['Celular'],
+        city:pessoaTemp['Cidade'],
+        state:pessoaTemp['Estado']
       });
       await client.sendText(message.from, bot.pessoa.resposta2);
       await client.sendText(message.from, bot.anuncio.pergunta1);
@@ -166,8 +185,18 @@ async function start(client) {
       codPessoa = data.id;
     } catch (error) {
       console.error('Erro na requisição:', error);
-      await client.sendText(message.from,'Ocorreu um erro ao chamar a API.');
+      
     }
+  }
+
+  async function buscarCep(cep){
+    var url = "https://viacep.com.br/ws/"+cep+"/json/"
+    try{
+      return await axios.get(url);
+    }catch (error) {
+      console.error('Erro na requisição:', error);
+    }
+    
   }
   async function menuIncial(message) {
       if (message.body == '1') {
@@ -233,17 +262,3 @@ async function start(client) {
     return cpf; // CPF válido
   }
 }
-
-// if (message.fromMe) {
-//   return;
-// }
-
-// const body = message.body.toLowerCase();
-
-// if (body === 'olá') {
-//   await client.sendText(message.from, 'Olá! Como posso ajudar?');
-// } else if (body === 'tchau') {
-//   await client.sendText(message.from, 'Até logo! Volte sempre!');
-// } else {
-//   await client.sendText(message.from, 'Desculpe, não entendi o que você disse.');
-// }

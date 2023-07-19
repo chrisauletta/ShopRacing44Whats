@@ -8,7 +8,7 @@
     "pessoa":{
         "pergunta1":"Ok, me informe seu CPF para consulta.",
         "pergunta2":"Ok, vamos fazer uma cadastro, é rapidinho.\nSó mandar as seguintes informações nesse mesmo formato,\nvou até colocar em outra menssagem para te ajudar a copiar e colar",
-        "pergunta22":"Nome Completo:\nCPF:\nTelefone:\nCelular:\nCidade:\nEstado:",
+        "pergunta22":"Nome Completo:\nCPF:\nTelefone:\nCelular:\nCEP:",
         "resposta2":"Seu cadastro foi efutuado com sucesso.\nAgora vamos anunciar!"
     },
     "anuncio":{
